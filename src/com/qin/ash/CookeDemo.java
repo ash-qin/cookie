@@ -31,8 +31,8 @@ public class CookeDemo extends HttpServlet {
 
         if (cookie1 != null){
 
-            response.getWriter().print("您的上一次访问时间为：" + URLDecoder.decode(cookie1.getValue()));
-            response.getWriter().write("您的上一次访问时间为：" + cookie1.getValue());
+            response.getWriter().print("您的上一次访问时间为：" + URLDecoder.decode(cookie1.getValue(),"UTF-8"));
+            response.getWriter().write("您的上一次访问时间为：" + URLDecoder.decode(cookie1.getValue(),"UTF-8"));
 
         }else{
 
@@ -43,9 +43,10 @@ public class CookeDemo extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
 
         String format = sdf.format(new Date());
-        format = URLEncoder.encode(format);
+        format = URLEncoder.encode(format,"UTF-8");
 
         Cookie cookie = new Cookie("lastvisit",format);
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
 
     }
